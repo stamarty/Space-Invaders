@@ -78,6 +78,7 @@ bulletSpeed = 20
 bulletState = "ready"
 
 
+
 def fire_bullet():
     global bulletState
     if bulletState == "ready":
