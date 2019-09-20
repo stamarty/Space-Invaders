@@ -1,6 +1,6 @@
-# Space Invaders
-# Thanks to Christian Thompson for this tutorial:
-# http://christianthompson.com/node/45
+#Space Invaders
+#Thanks to Christian Thompson for this tutorial:
+#http://christianthompson.com/node/45
 
 import turtle
 import os
@@ -19,10 +19,10 @@ border_pen = turtle.Turtle()
 border_pen.speed(0)
 border_pen.color("white")
 border_pen.penup()
-border_pen.setposition(-300, -300)
+border_pen.setposition(-300,-300)
 border_pen.pendown()
 border_pen.pensize(3)
-for side in range(4):
+for side in range (4):
     border_pen.fd(600)
     border_pen.lt(90)
 border_pen.hideturtle()
@@ -33,8 +33,8 @@ score_pen.speed(0)
 score_pen.color("white")
 score_pen.penup()
 score_pen.setposition(-290, 275)
-scorestring = "Score: %s " % score
-score_pen.write(scorestring, False, align="left", font=("Arial", 14, "normal"))
+scorestring = "Score: %s " %score
+score_pen.write(scorestring, False, align = "left", font = ("Arial", 14, "normal"))
 score_pen.hideturtle()
 
 player = turtle.Turtle()
@@ -46,6 +46,7 @@ player.setposition(0, -280)
 player.setheading(90)
 
 playerSpeed = 15
+
 
 number_of_enemies = 5
 enemies = []
@@ -77,28 +78,22 @@ bullet.hideturtle()
 bulletSpeed = 20
 bulletState = "ready"
 
-
 def fire_bullet():
     global bulletState
     if bulletState == "ready":
+        winsound.PlaySound("laser.wav", winsound.SND_ASYNC)
         bulletState = "fire"
-        if bulletState == "fire" and not bullet.isvisible():
-            x = player.xcor()
-            y = player.ycor() + 10
-            bullet.setposition(x, y)
-            bullet.showturtle()
-            winsound.PlaySound("laser.wav", winsound.SND_ASYNC)
-
-
-
+        x = player.xcor()
+        y = player.ycor() + 10
+        bullet.setposition(x, y)
+        bullet.showturtle()
 
 def isCollision(t1, t2):
-    distance = math.sqrt(math.pow(t1.xcor() - t2.xcor(), 2) + math.pow(t1.ycor() - t2.ycor(), 2))
+    distance = math.sqrt(math.pow(t1.xcor()-t2.xcor(), 2) + math.pow(t1.ycor()-t2.ycor(), 2))
     if distance < 15:
         return True
     else:
         return False
-
 
 def move_left():
     x = player.xcor()
@@ -106,7 +101,6 @@ def move_left():
     if x < -285:
         x = -285
     player.setx(x)
-
 
 def move_right():
     x = player.xcor()
@@ -143,9 +137,9 @@ while True:
             enemySpeed *= -1
 
         if isCollision(bullet, enemy):
-            bulletState = "ready"
             winsound.PlaySound("explosion.wav", winsound.SND_ASYNC)
             bullet.hideturtle()
+            bulletState = "ready"
             bullet.setposition(0, 400)
             x = random.randint(-200, 200)
             y = random.randint(100, 250)
@@ -154,6 +148,7 @@ while True:
             scorestring = "Score: %s " % score
             score_pen.clear()
             score_pen.write(scorestring, False, align="left", font=("Arial", 14, "normal"))
+
 
         if isCollision(player, enemy):
             enemy.hideturtle()
@@ -166,8 +161,8 @@ while True:
         bullet.sety(y)
 
     if bullet.ycor() > 280:
-        bullet.hideturtle()
         bullet.setposition(0, 400)
+        bullet.hideturtle()
         bulletState = "ready"
 
 turtle.mainloop
