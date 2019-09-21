@@ -81,7 +81,6 @@ bulletState = "ready"
 def fire_bullet():
     global bulletState
     if bulletState == "ready":
-        winsound.PlaySound("laser.wav", winsound.SND_ASYNC)
         bulletState = "fire"
         x = player.xcor()
         y = player.ycor() + 10
